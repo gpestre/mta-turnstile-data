@@ -12,8 +12,21 @@ import pandas as pd
 # To preview HTML:
 #from IPython.core.display import HTML
 
-# Get Turnstile Data landing page:
+# Create browsing session:
 session_requests = requests.session()
+
+# Get Station list:
+url = 'http://web.mta.info/developers/data/nyct/subway/Stations.csv'
+page_result = session_requests.get(
+    url, 
+    headers = dict(referer = url)
+)
+stations_data = page_result.text.replace('\r\n','\n')
+with open('data/stations.csv','w') as f:
+    f.write(stations_data)
+print("Saved : data/stations.csv .")
+
+# Get Turnstile Data landing page:
 url = 'http://web.mta.info/developers/turnstile.html'
 page_result = session_requests.get(
     url, 
