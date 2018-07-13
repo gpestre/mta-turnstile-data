@@ -22,9 +22,9 @@ page_result = session_requests.get(
     headers = dict(referer = url)
 )
 stations_data = page_result.text.replace('\r\n','\n')
-with open('data/stations.csv','w') as f:
+with open('data/downloaded/stations.csv','w') as f:
     f.write(stations_data)
-print("Saved : data/stations.csv .")
+print("Saved : data/downloaded/stations.csv .")
 
 # Get Turnstile Data landing page:
 url = 'http://web.mta.info/developers/turnstile.html'
@@ -56,13 +56,13 @@ for i,row in data_files.iterrows():
     ).text
     
     data_date = row['date'].strftime("%Y-%m-%d")
-    data_filepath = '../data/mta-turnstile-data_{}.csv'.format(data_date)
+    data_filepath = 'data/downloaded/mta-turnstile-data_{}.csv'.format(data_date)
     with open(data_filepath,'w') as f:
         f.write(data_csv+"\n")
     print("Saved : {}".format(data_filepath))
     
     now_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    with open('../data/_mta-turnstile-data_download-log.txt','a') as log:
+    with open('data/downloaded/_mta-turnstile-data_download-log.txt','a') as log:
         log.write("{} : Downloaded mta-turnstile-data_{} .\n".format(now_date,data_date))
     
 print("Done.")
