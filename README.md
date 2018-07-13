@@ -13,3 +13,4 @@ http://web.mta.info/developers/data/nyct/subway/Stations.csv
 - For each C/A , UNIT, and SCP, values that are 2 standard deviations above or below the mean are removed.  
 
 **Note:** The code is configured for reading turnstile data from 2014-10-18 or later. Files from earlier dates are formatted differently and the code is not currently adapted for parsing them.
+Turnstile data is merged with lookup data using the `UNIT` (turnstile data) and `Remote` (lookup data) columns.
